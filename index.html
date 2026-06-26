@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabrício Rêgo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: #0b0d14;
+    font-family: 'Inter', sans-serif;
+    color: #eef0f7;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── ONDAS DE FUNDO ── */
+  .waves-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+  }
+
+  /* ── PROFILE ── */
+  .profile {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 48px 22px 28px;
+    width: 100%;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+  }
+
+  .avatar-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4080b8, #7aa4f0);
+    z-index: 0;
+  }
+
+  .avatar-wrap img {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    z-index: 1;
+    display: block;
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .hero-name {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7aa4f0;
+  }
+
+  .hero-authority {
+    font-size: 0.75rem;
+    color: #6b7589;
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  .hero-authority strong {
+    color: #9aa3b8;
+    font-weight: 500;
+  }
+
+  /* ── CARDS ── */
+  .cards {
+    width: 100%;
+    padding: 4px 16px 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card {
+    width: 100%;
+    border-radius: 18px;
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+  }
+
+  /* Card Mentoria — azul marinho (era diagnóstico) */
+  .card-mentoria {
+    background: linear-gradient(135deg, #0d1f45 0%, #122460 50%, #0a1830 100%);
+    border-color: rgba(45,91,181,0.3);
+  }
+
+  .card-mentoria::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(45,100,220,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Card Diagnóstico — preto/cinza escuro */
+  .card-diag {
+    background: linear-gradient(135deg, #0e0f13 0%, #161820 50%, #0a0b0f 100%);
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .card-diag::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(180,180,200,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .card-soon {
+    background: linear-gradient(135deg, #111318 0%, #161a22 100%);
+    border-color: rgba(255,255,255,0.06);
+    opacity: 0.65;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
+  .tag-mentoria {
+    background: rgba(45,91,181,0.2);
+    color: #7aa4f0;
+    border: 1px solid rgba(45,91,181,0.35);
+  }
+
+  .tag-diag {
+    background: rgba(255,255,255,0.05);
+    color: #8892a4;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tag-soon {
+    background: rgba(255,255,255,0.05);
+    color: #5a6275;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .badge-soon {
+    background: rgba(201,168,76,0.12);
+    color: #c9a84c;
+    border: 1px solid rgba(201,168,76,0.2);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgba(238,240,247,0.5);
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+
+  .cta-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-mentoria { color: #7aa4f0; }
+  .cta-diag { color: #8892a4; }
+
+  .cta-arrow {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .card:hover .cta-arrow { transform: translateX(3px); }
+
+  .arrow-mentoria {
+    background: rgba(45,91,181,0.25);
+    border: 1px solid rgba(45,91,181,0.4);
+    color: #7aa4f0;
+  }
+
+  .arrow-diag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #8892a4;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 0 0 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-text {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2e3344;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ONDAS DE FUNDO -->
+  <svg class="waves-bg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-40 200 C60 160, 160 240, 260 200 S420 160, 500 200" fill="none" stroke="#b8d0e8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M-40 310 C60 270, 160 350, 260 310 S420 270, 500 310" fill="none" stroke="#7aaad4" stroke-width="9" stroke-linecap="round"/>
+    <path d="M-40 420 C60 380, 160 460, 260 420 S420 380, 500 420" fill="none" stroke="#4080b8" stroke-width="13" stroke-linecap="round"/>
+    <path d="M-40 580 C60 540, 160 620, 260 580 S420 540, 500 580" fill="none" stroke="#b8d0e8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M-40 680 C60 640, 160 720, 260 680 S420 640, 500 680" fill="none" stroke="#7aaad4" stroke-width="9" stroke-linecap="round"/>
+    <path d="M-40 780 C60 740, 160 820, 260 780 S420 740, 500 780" fill="none" stroke="#4080b8" stroke-width="13" stroke-linecap="round"/>
+  </svg>
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="avatar-wrap">
+      <img src="https://raw.githubusercontent.com/fabriciorego-afluente/links/refs/heads/main/foto.jpg"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Fabricio+Rego&background=1e3a6e&color=f0f2f7&size=200&bold=true';"
+           alt="Fabrício Rêgo">
+    </div>
+    <div class="profile-info">
+      <div class="hero-name">Fabrício Rêgo</div>
+      <div class="hero-subtitle">Estrategista de Receita Comercial</div>
+      <div class="hero-authority"><strong>10 anos</strong> criando, vendendo infoprodutos e desenvolvendo negócios digitais.</div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <!-- 1º — Mentoria (azul marinho) -->
+    <a class="card card-mentoria" href="https://form.respondi.app/ZMA54e3D" target="_blank" rel="noopener">
+      <div class="card-header">
+        <span class="card-tag tag-mentoria">Mentoria Comercial</span>
+      </div>
+      <div class="card-title">Estrutura comercial para infoprodutores que querem escalar</div>
+      <div class="card-desc">Negócio que depende do dono para vender não escala. A Afluente estrutura o comercial de infoprodutores (com ou sem time) para a receita fluir sem você.</div>
+      <div class="divider"></div>
+      <div class="card-cta">
+        <span class="cta-text cta-mentoria">Quero me candidatar</span>
+        <span class="cta-arrow arrow-mentoria">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 2º — Diagnóstico (preto/cinza) -->
+    <a class="card card-diag" href="https://fabriciorego-afluente.github.io/quiz-diagnostico-tpg/" target="_blank" rel="noopener">
+      <div class="card-header">
+        <span class="card-tag tag-diag">Diagnóstico gratuito</span>
+      </div>
+      <div class="card-title">Descubra o que trava a previsibilidade da sua receita</div>
+      <div class="card-desc">3 minutos. Resultado imediato. Caminho claro.</div>
+      <div class="divider"></div>
+      <div class="card-cta">
+        <span class="cta-text cta-diag">Fazer o Diagnóstico T.P.G.</span>
+        <span class="cta-arrow arrow-diag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- 3º — Masterclass (em breve) -->
+    <div class="card card-soon">
+      <div class="card-header">
+        <span class="card-tag tag-soon">Masterclass</span>
+        <span class="badge-soon">Em breve</span>
+      </div>
+      <div class="card-title">Como criei afluentes de receita sem novo lançamento e sem o dono aparecer</div>
+      <div class="card-desc">Um novo modelo de crescimento para negócios digitais que já vendem.</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Afluente Mentoria Comercial</div>
+  </div>
+
+</div>
+</body>
+</html>
