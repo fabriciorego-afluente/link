@@ -161,9 +161,9 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
     box-shadow: 0 16px 48px rgba(0,0,0,0.55);
   }
 
-  /* Card Mentoria — azul marinho (era diagnóstico) */
+  /* Mentoria — azul marinho */
   .card-mentoria {
-    background: linear-gradient(135deg, #0d1f45 0%, #122460 50%, #0a1830 100%);
+    background: linear-gradient(135deg, rgba(13,31,69,0.85) 0%, rgba(18,36,96,0.9) 50%, rgba(10,24,48,0.85) 100%);
     border-color: rgba(45,91,181,0.3);
   }
 
@@ -176,10 +176,10 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
     pointer-events: none;
   }
 
-  /* Card Diagnóstico — preto/cinza escuro */
+  /* Diagnóstico — roxo/índigo */
   .card-diag {
-    background: linear-gradient(135deg, #0e0f13 0%, #161820 50%, #0a0b0f 100%);
-    border-color: rgba(255,255,255,0.08);
+    background: linear-gradient(135deg, rgba(19,13,46,0.85) 0%, rgba(26,16,64,0.9) 50%, rgba(14,9,32,0.85) 100%);
+    border-color: rgba(120,80,220,0.25);
   }
 
   .card-diag::before {
@@ -187,18 +187,17 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
     position: absolute;
     top: -30px; right: -30px;
     width: 160px; height: 160px;
-    background: radial-gradient(circle, rgba(180,180,200,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(120,80,220,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
 
-  .card-soon {
-    background: linear-gradient(135deg, #111318 0%, #161a22 100%);
-    border-color: rgba(255,255,255,0.06);
-    opacity: 0.65;
-    cursor: default;
-    pointer-events: none;
+  /* Masterclass — cinza semitransparente */
+  .card-master {
+    background: linear-gradient(135deg, rgba(200,208,225,0.12) 0%, rgba(180,188,210,0.18) 50%, rgba(190,198,218,0.12) 100%);
+    border-color: rgba(200,208,225,0.2);
   }
 
+  /* ── TAGS ── */
   .card-tag {
     display: inline-flex;
     align-items: center;
@@ -218,29 +217,18 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
   }
 
   .tag-diag {
-    background: rgba(255,255,255,0.05);
+    background: rgba(120,80,220,0.15);
+    color: #a98eed;
+    border: 1px solid rgba(120,80,220,0.3);
+  }
+
+  .tag-master {
+    background: rgba(255,255,255,0.08);
     color: #8892a4;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
   }
 
-  .tag-soon {
-    background: rgba(255,255,255,0.05);
-    color: #5a6275;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .badge-soon {
-    background: rgba(201,168,76,0.12);
-    color: #c9a84c;
-    border: 1px solid rgba(201,168,76,0.2);
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 20px;
-  }
-
+  /* ── CARD CONTENT ── */
   .card-header {
     display: flex;
     align-items: center;
@@ -252,6 +240,7 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
     font-weight: 800;
     line-height: 1.25;
     letter-spacing: -0.01em;
+    color: #eef0f7;
   }
 
   .card-desc {
@@ -270,7 +259,6 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 2px;
   }
 
   .cta-text {
@@ -280,7 +268,8 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
   }
 
   .cta-mentoria { color: #7aa4f0; }
-  .cta-diag { color: #8892a4; }
+  .cta-diag { color: #a98eed; }
+  .cta-master { color: #8892a4; }
 
   .cta-arrow {
     width: 34px; height: 34px;
@@ -299,8 +288,14 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
   }
 
   .arrow-diag {
+    background: rgba(120,80,220,0.15);
+    border: 1px solid rgba(120,80,220,0.3);
+    color: #a98eed;
+  }
+
+  .arrow-master {
     background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
     color: #8892a4;
   }
 
@@ -352,13 +347,13 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
   <!-- CARDS -->
   <div class="cards">
 
-    <!-- 1º — Mentoria (azul marinho) -->
+    <!-- 1º Mentoria -->
     <a class="card card-mentoria" href="https://form.respondi.app/ZMA54e3D" target="_blank" rel="noopener">
       <div class="card-header">
         <span class="card-tag tag-mentoria">Mentoria Comercial</span>
       </div>
-      <div class="card-title">Estrutura comercial para infoprodutores que querem escalar</div>
-      <div class="card-desc">Negócio que depende do dono para vender não escala. A Afluente estrutura o comercial de infoprodutores (com ou sem time) para a receita fluir sem você.</div>
+      <div class="card-title">Setup comercial para infoprodutores que querem escalar receita</div>
+      <div class="card-desc">A Afluente estrutura o comercial de infoprodutores (com ou sem time) para a receita fluir sem você.</div>
       <div class="divider"></div>
       <div class="card-cta">
         <span class="cta-text cta-mentoria">Quero me candidatar</span>
@@ -368,7 +363,7 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <!-- 2º — Diagnóstico (preto/cinza) -->
+    <!-- 2º Diagnóstico -->
     <a class="card card-diag" href="https://fabriciorego-afluente.github.io/quiz-diagnostico-tpg/" target="_blank" rel="noopener">
       <div class="card-header">
         <span class="card-tag tag-diag">Diagnóstico gratuito</span>
@@ -384,15 +379,21 @@ src="https://www.facebook.com/tr?id=809401277482294&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <!-- 3º — Masterclass (em breve) -->
-    <div class="card card-soon">
+    <!-- 3º Masterclass -->
+    <a class="card card-master" href="https://youtu.be/_nz6vh8Ukf8" target="_blank" rel="noopener">
       <div class="card-header">
-        <span class="card-tag tag-soon">Masterclass</span>
-        <span class="badge-soon">Em breve</span>
+        <span class="card-tag tag-master">Masterclass</span>
       </div>
       <div class="card-title">Como criei afluentes de receita sem novo lançamento e sem o dono aparecer</div>
       <div class="card-desc">Um novo modelo de crescimento para negócios digitais que já vendem.</div>
-    </div>
+      <div class="divider"></div>
+      <div class="card-cta">
+        <span class="cta-text cta-master">Assista agora</span>
+        <span class="cta-arrow arrow-master">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
 
   </div>
 
